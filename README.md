@@ -3,11 +3,11 @@ This repository serves as a generic backend template designed to provide a robus
 
 Key Features
 Clean Architecture: Ensures separation of concerns and a scalable, maintainable codebase. <br/>
-MediatR: Implements the mediator pattern for handling requests and responses.
-Identity: Provides authentication and authorization capabilities.
-Refresh Token Implementation: Maintains user sessions securely.
-Seeds: Includes initial data seeding for easier setup and testing.
-Unit of Work: Manages database transactions efficiently.
-Ardalis: Utilizes Ardalis specifications for querying.
-AutoMapper: Simplifies object mapping.
+MediatR: Implements the mediator pattern for handling requests and responses.<br/>
+Identity: Provides authentication and authorization capabilities.<br/>
+Refresh Token Implementation: Maintains user sessions securely.<br/>
+Seeds: Includes initial data seeding for easier setup and testing.<br/>
+Unit of Work: Manages database transactions efficiently.<br/>
+Ardalis: Utilizes Ardalis specifications for querying.<br/>
+AutoMapper: Simplifies object mapping.<br/>
 FluentValidation: Ensures robust validation of incoming data
