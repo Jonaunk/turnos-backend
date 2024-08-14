@@ -1,4 +1,4 @@
-Generic Backend Template
+Generic Backend Template<br/>
 This repository serves as a generic backend template designed to provide a robust starting point for building new APIs. It is built using Clean Architecture principles and incorporates several essential technologies and patterns to ensure maintainability, scalability, and ease of development.
 
 Key Features
