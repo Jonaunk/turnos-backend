@@ -1,14 +1,14 @@
-using System.Text.Json.Serialization;
 using Application;
+using Identity;
+using Identity.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.OpenApi.Models;
 using Persistence;
 using Persistence.Contexts;
-using Persistence.Seeds;
-using Shared;
 using Serilog;
+using Shared;
+using System.Text.Json.Serialization;
 using WebApi.Extensions;
-using Domain.Entities.Users;
-using Microsoft.OpenApi.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +17,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 //Application Layer
 builder.Services.AddApplicationLayer(builder.Configuration);
+
+//Identity Layer
+builder.Services.AddIdentityInfrastructureLayer(builder.Configuration);
+
 //Persistence Layer
 builder.Services.AddPersistenceLayer(builder.Configuration);
 //Shared Layer
@@ -107,14 +111,14 @@ async Task CargarSeeds()
     using var scope = app.Services.CreateScope();
     var services = scope.ServiceProvider;
 
-    var userManager = services.GetRequiredService<UserManager<User>>();
+    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
     var context = services.GetRequiredService<ApplicationDbContext>();
     context.Database.EnsureCreated();
 
 
-    await DefaultRoles.SeedAsync(userManager, roleManager);
-    await DefaultUser.SeedAsync(userManager, roleManager, context);
+    //await DefaultRoles.SeedAsync(userManager, roleManager);
+    //await DefaultUser.SeedAsync(userManager, roleManager, context);
 
 }

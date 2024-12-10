@@ -1,21 +1,19 @@
 using Application.Common.Interfaces;
 using Domain.Common;
 using Domain.Common.Interfaces;
-using Domain.Entities.Users;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace Persistence.Contexts
 {
-    public class ApplicationDbContext : IdentityDbContext<User, IdentityRole, string>
+    public class ApplicationDbContext : DbContext
     {
         private readonly IDateTimeService _datetime;
         private readonly IDomainEventDispatcher _domainEventDispatcher;
         private readonly CurrentUser _user;
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IDateTimeService datetime,
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options,
+            IDateTimeService datetime,
             IDomainEventDispatcher domainEventDispatcher,
             ICurrentUserService currentUserService) : base(options)
         {
@@ -26,10 +24,6 @@ namespace Persistence.Contexts
             _user = currentUserService.User;
         }
 
-
-        //public DbSet<User> Users { get; set; }
-
-        public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
 
 
 

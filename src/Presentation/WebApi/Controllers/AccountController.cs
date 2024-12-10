@@ -26,14 +26,14 @@ namespace WebApi.Controllers
         {
             return Ok(await Mediator.Send(new RegisterCommand
             {
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                CountryName = request.CountryName,
+                Nombre = request.Nombre,
+                Apellido = request.Apellido,
                 Email = request.Email,
                 Password = request.Password,
                 ConfirmPassword = request.ConfirmPassword,
                 UserName = request.UserName,
-                Origin = Request.Headers["origin"]
+                Origin = GetOriginFromRequest()
+                //Origin = Request.Headers["origin"]
             }));
         }
 
@@ -48,6 +48,6 @@ namespace WebApi.Controllers
             }));
         }
 
-
+        private string GetOriginFromRequest() => $"{Request.Scheme}://{Request.Host.Value}{Request.PathBase.Value}";
     }
 }

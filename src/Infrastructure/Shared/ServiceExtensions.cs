@@ -5,6 +5,7 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Shared.Services;
 using Microsoft.Extensions.Configuration;
+using Application.Common.Mailing;
 
 namespace Shared
 {
@@ -15,7 +16,9 @@ namespace Shared
             services
             .AddTransient<IMediator, Mediator>()
             .AddTransient<IDomainEventDispatcher, DomainEventDispatcher>()
-            .AddTransient<IDateTimeService, DateTimeService>();
+            .AddTransient<IDateTimeService, DateTimeService>()
+            .AddTransient<IEmailService, EmailService>()
+            .AddTransient<IEmailTemplateService, EmailTemplateService>();
         }
     }
 }

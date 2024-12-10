@@ -6,11 +6,11 @@ namespace Application.Features.Authenticate.Commands.RegisterCommand
     {
         public RegisterCommandValidator()
         {
-            RuleFor(p => p.FirstName)
+            RuleFor(p => p.Nombre)
               .NotEmpty().WithMessage("{PropertyName} no puede ser vacío.")
               .MaximumLength(80).WithMessage("{PropertyName} no debe exceder de {MaxLength} caracteres.");
 
-            RuleFor(p => p.LastName)
+            RuleFor(p => p.Apellido)
                .NotEmpty().WithMessage("{PropertyName} no puede ser vacío.")
                .MaximumLength(80).WithMessage("{PropertyName} no debe exceder de {MaxLength} caracteres.");
 

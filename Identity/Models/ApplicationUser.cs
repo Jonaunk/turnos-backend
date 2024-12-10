@@ -1,14 +1,23 @@
+﻿using Domain.Common;
+using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
-namespace Domain.Common
+namespace Identity.Models
 {
-    public abstract class BaseEntity : IBaseEntity
+    public class ApplicationUser : IdentityUser
     {
         [JsonIgnore]
         private readonly List<DomainEvent> _domainEvents = new();
 
-        public Guid Id { get; set; }
+
+        public string? Nombre { get; set; }
+        public string? Apellido { get; set; }
 
         [NotMapped]
         public IReadOnlyCollection<DomainEvent> DomainEvents => _domainEvents.AsReadOnly();

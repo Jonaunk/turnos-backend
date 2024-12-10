@@ -20,7 +20,7 @@ namespace Application.Features.Authenticate.Commands.AuthenticateCommand
             {
                 Email = request.Email,
                 Password = request.Password
-            });
+            }, request.IpAddress);
         }
     }
 }

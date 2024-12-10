@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities.Users
+namespace Identity.Models
 {
     public class RefreshToken
     {
@@ -18,8 +18,8 @@ namespace Domain.Entities.Users
         public string? RevokedByIp { get; set; }
         public string? replaceByToken { get; set; }
         public bool IsActive => Revoked == null && !IsExpired;
-        public User? User { get; set; }
-        public string? UserId { get; set; }
+        public ApplicationUser User { get; set; }
+        public string UserId { get; set; }
 
     }
 }

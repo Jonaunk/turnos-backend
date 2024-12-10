@@ -11,6 +11,11 @@ namespace Application.Common.Wrappers
             Succeded = false;
             Message = message;
         }
+        public Response(bool succeded, string message)
+        {
+            Succeded = succeded;
+            Message = message;
+        }
         public Response(T data, string? message = null)
         {
             Succeded = true;

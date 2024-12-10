@@ -15,16 +15,18 @@ namespace Application.Features.Authenticate.Commands.RegisterCommand
         }
         public async Task<Response<string>> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
-            return await _accountService.RegisterAsync(new RegisterRequest
+            var user = await _accountService.RegisterAsync(new RegisterRequest
             {
                 Email = request.Email,
                 UserName = request.UserName,
                 Password = request.Password,
                 ConfirmPassword = request.ConfirmPassword,
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                CountryName = request.CountryName,
-            }, request.Origin!);
+                Nombre = request.Nombre,
+                Apellido = request.Apellido,
+            }, request.Origin);
+
+            return user;
+
         }
     }
 }
