@@ -9,12 +9,12 @@ namespace Domain.Common
         [MaxLength(50)]
         public string? CreatedBy { get; set; }
         [Required]
-        public DateTime Created { get; set; }
+        public DateTime CreatedDate { get; set; }
         [MaxLength(50)]
         public string? ModifiedBy { get; set; }
-        public DateTime? Modified { get; set; }
+        public DateTime? ModifiedDate { get; set; }
         [MaxLength(50)]
-        public string? DeleteBy { get; set; }
-        public DateTime? Deleted { get; set; }
+        public string? DeletedBy { get; set; }
+        public DateTime? DeletedDate { get; set; }
     }
 }

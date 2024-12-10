@@ -13,22 +13,24 @@ namespace Persistence.Contexts
     {
         private readonly IDateTimeService _datetime;
         private readonly IDomainEventDispatcher _domainEventDispatcher;
+        private readonly CurrentUser _user;
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IDateTimeService datetime, IDomainEventDispatcher domainEventDispatcher) : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IDateTimeService datetime,
+            IDomainEventDispatcher domainEventDispatcher,
+            ICurrentUserService currentUserService) : base(options)
         {
             //agregamos para poder seguir los cambios y que Entity se de cuenta cuando hace un SaveAsync
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             this._datetime = datetime;
             _domainEventDispatcher = domainEventDispatcher;
+            _user = currentUserService.User;
         }
 
 
         //public DbSet<User> Users { get; set; }
 
         public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
-        //public DbSet<CampaignBlock> CampaignsContent { get; set; }
-        //public DbSet<ContentParagraphData> ContentParagraphs { get; set; }
-        //public DbSet<ContentCodeData> ContentCodes { get; set; }
+
 
 
         //Sobrescribimos SaveAsync
@@ -40,9 +42,18 @@ namespace Persistence.Contexts
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.Created = _datetime.NowUtc; break;
+                        entry.Entity.CreatedBy = _user.Id;
+                        entry.Entity.CreatedDate = _datetime.Now;
+                        break;
                     case EntityState.Modified:
-                        entry.Entity.Modified = _datetime.NowUtc; break;
+                        entry.Entity.ModifiedBy = _user.Id;
+                        entry.Entity.ModifiedDate = _datetime.Now;
+                        break;
+                    case EntityState.Deleted:
+                        entry.State = EntityState.Modified;
+                        entry.Entity.DeletedBy = _user.Id;
+                        entry.Entity.DeletedDate = _datetime.Now;
+                        break;
                 }
             }
             //return base.SaveChangesAsync();

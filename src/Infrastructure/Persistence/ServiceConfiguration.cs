@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using Persistence.Contexts;
 using Persistence.Repositories;
 using Persistence.Services;
+using Shared.Services;
 using System.Text;
 
 namespace Persistence
@@ -28,14 +29,6 @@ namespace Persistence
                 b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
 
-            //    // Register services here
-            //services.Configure<MongoDbSettings>(configuration.GetSection(nameof(MongoDbSettings)));
-
-            //services.AddSingleton<MongoDbContext>(serviceProvider =>
-            //{
-            //    var settings = serviceProvider.GetRequiredService<IOptions<MongoDbSettings>>().Value;
-            //    return new MongoDbContext(settings.ConnectionString, settings.DatabaseName);
-            //});
 
             #region Services
 
@@ -98,7 +91,8 @@ namespace Persistence
             #region Repositories
             services
                 .AddTransient(typeof(IUnitOfWork), typeof(UnitOfWork))
-                .AddTransient(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>));
+                .AddTransient(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>))
+                .AddTransient(typeof(ICurrentUserService), typeof(CurrentUserService));
             #endregion
 
             #region Caching
